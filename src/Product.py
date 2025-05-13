@@ -14,3 +14,4 @@ class Product:
             f"description={self.description!r}, "
             f"price={self.price}, quantity={self.quantity})"
         )
+
