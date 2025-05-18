@@ -44,18 +44,32 @@ def test_repr_format():
 
 
 def test_new_product_creates_new():
-    products = []
+    # Очищаем список продуктов перед запуском теста
+    if hasattr(Product, "_Product__products"):
+        Product._Product__products.clear()
+    else:
+        Product.products.clear()
+
     data = {"name": "Велосипед", "description": "Горный", "price": 15000, "quantity": 1}
-    p = Product.new_product(data, products)
+    p = Product.new_product(data)
+    products = Product._Product__products if hasattr(Product, "_Product__products") else Product.products
     assert p in products
     assert p.name == "Велосипед"
     assert p.quantity == 1
 
 
 def test_new_product_updates_existing():
-    products = [Product("Часы", "Умные", 2000, 3)]
+    # Очищаем список продуктов перед запуском теста
+    if hasattr(Product, "_Product__products"):
+        Product._Product__products.clear()
+    else:
+        Product.products.clear()
+
+    # Добавляем первый продукт
+    product = Product("Часы", "Умные", 2000, 3)
     data = {"name": "Часы", "description": "Умные", "price": 2500, "quantity": 2}
-    p = Product.new_product(data, products)
+    p = Product.new_product(data)
+    products = Product._Product__products if hasattr(Product, "_Product__products") else Product.products
     assert len(products) == 1
     assert p.quantity == 5  # Было 3, добавили 2
     assert p.price == 2500  # price становится больше
