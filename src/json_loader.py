@@ -22,3 +22,4 @@ def load_categories_from_json(filename):
 
 cats = load_categories_from_json("../data/products.json")
 print(cats)
+
