@@ -56,3 +56,12 @@ class Product:
             f"description={self.description!r}, "
             f"price={self.__price}, quantity={self.quantity})"
         )
+
+    def __add__(self, other):
+        if not isinstance(other, Product):
+            return NotImplemented
+        return self.price*self.quantity + other.price*other.quantity
+
+
+    def __str__(self):
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
