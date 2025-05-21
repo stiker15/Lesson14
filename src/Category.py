@@ -32,4 +32,7 @@ class Category:
             f"description={self.description!r},"
             f" products={self.products!r})"
         )
-    
+
+    def __str__(self):
+        total_quantity = sum(p.quantity for p in self.__products)
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
