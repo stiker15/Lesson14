@@ -1,4 +1,4 @@
-
+import pytest
 from src.Category import Category
 from src.Product import Product
 
@@ -40,3 +40,30 @@ def test_repr_contains_category_name():
     p = Product("Экран", "LED", 8000, 2)
     cat = Category("Дисплеи", "Техника", [p])
     assert "Category(name='Дисплеи'" in cat.__repr__()
+
+
+@pytest.fixture
+def products():
+    return [
+        Product("Товар 1", "Описание 1", 100, 5),
+        Product("Товар 2", "Описание 2", 200, 2),
+        Product("Товар 3", "Описание 3", 300, 3),
+    ]
+
+@pytest.fixture
+def category(products):
+    return Category("Категория 1", "Описание категории", products)
+
+def test_category_str(category):
+    # Всего товаров: 5 + 2 + 3 = 10
+    assert str(category) == "Категория 1, количество продуктов: 10 шт."
+
+def test_category_products_property(category, products):
+    # Проверяем, что все продукты выводятся корректно, благодаря __str__ в Product
+    product_lines = [str(p) for p in products]
+    result = category.products
+    for line in product_lines:
+        assert line in result
+
+def test_category_product_count(category):
+    assert category.product_count == 3
