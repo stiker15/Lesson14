@@ -58,8 +58,8 @@ class Product:
         )
 
     def __add__(self, other):
-        if not isinstance(other, Product):
-            return NotImplemented
+        if type(self) is not type(other):
+            raise TypeError("Можно складывать только товары одного типа.")
         return self.price*self.quantity + other.price*other.quantity
 
 
