@@ -1,6 +1,6 @@
 import pytest
 
-from src.Product import Product
+from src.Product import Product, Smartphone, LawnGrass
 
 
 
@@ -105,3 +105,58 @@ def test_add_wrong_type(product1):
     with pytest.raises(TypeError):
         _ = product1 + 10  # 10 — не Product
 
+def test_add_product_typeerror():
+    p1 = Product("Товар1", "Описание", 100, 2)
+    class Another(Product):
+        pass
+    p2 = Another("Товар2", "Описание", 200, 1)
+    with pytest.raises(TypeError):
+        p1+p2
+
+def test_smartphone_creation():
+    s = Smartphone("iPhone 13", "Смартфон", 90000, 5, 98.5, "iPhone 13", 128, "Черный")
+    assert s.name == "iPhone 13"
+    assert s.description == "Смартфон"
+    assert s.price == 90000
+    assert s.quantity == 5
+    assert s.efficiency == 98.5
+    assert s.model == "iPhone 13"
+    assert s.memory == 128
+    assert s.color == "Черный"
+
+def test_lawngrass_creation():
+    g = LawnGrass("Элитная", "Трава", 600, 10, "Россия", 7, "Зеленый")
+    assert g.name == "Элитная"
+    assert g.description == "Трава"
+    assert g.price == 600
+    assert g.quantity == 10
+    assert g.country == "Россия"
+    assert g.germination_period == 7
+    assert g.color == "Зеленый"
+
+#Проверка функции str
+
+def test_smartphone_str():
+    s = Smartphone("iPhone 13", "Смартфон", 90000, 5, 98.5, "iPhone 13", 128, "Черный")
+    assert "iPhone 13" in str(s)
+    assert "128ГБ" in str(s)
+    assert "Черный" in str(s)
+
+def test_lawngrass_str():
+    g = LawnGrass("Элитная", "Трава", 600, 10, "Россия", 7, "Зеленый")
+    assert "Элитная" in str(g)
+    assert "Россия" in str(g)
+    assert "7 дн." in str(g)
+    assert "Зеленый" in str(g)
+
+#Проверка метода сложения
+
+def test_smartphone_add():
+    s1 = Smartphone("Model1", "Desc", 100, 2, 90, "M1", 128, "Grey")
+    s2 = Smartphone("Model2", "Desc", 200, 1, 92, "M2", 256, "Black")
+    assert s1 + s2 == 100 * 2 + 200 * 1
+
+def test_lawngrass_add():
+    g1 = LawnGrass("G1", "Grass", 10, 2, "RU", 7, "Green")
+    g2 = LawnGrass("G2", "Grass", 20, 3, "KZ", 8, "Dark Green")
+    assert g1 + g2 == 10 * 2 + 20 * 3

@@ -25,8 +25,10 @@ def test_category_products_count():
 def test_add_product_and_count():
     cat = Category("Техника", "Разное")
     p = Product("Утюг", "Паровой", 2500, 1)
+    # Запомним текущее количество продуктов до добавления
+    old_count = Category.products_count
     cat.add_product(p)
-    assert cat.product_count == 1
+    assert Category.products_count == old_count + 1
     assert "Утюг" in cat.products
 
 
