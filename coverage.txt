@@ -1,0 +1,10 @@
+Name                     Stmts   Miss  Cover   Missing
+------------------------------------------------------
+src\Category.py             26      1    96%   17
+src\Product.py              61      4    93%   29-32
+src\__init__.py              0      0   100%
+tests\__init__.py            0      0   100%
+tests\test_Category.py      48      0   100%
+tests\test_Product.py      117      2    98%   54, 69
+------------------------------------------------------
+TOTAL                      252      7    97%
